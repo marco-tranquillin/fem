@@ -8,8 +8,9 @@ import com.googlecode.objectify.annotation.Index;
 public class User  {
 	
 	@Id String login;
-	String password;
-	String salt;
+	@Index String type;
+	byte[] password;
+	byte[] salt;
 	@Index String jwt;
 	long expirationDate;
 	
@@ -21,16 +22,16 @@ public class User  {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	public String getPassword() {
+	public byte[] getPassword() {
 		return password;
 	}
-	public void setPassword(String password) {
+	public void setPassword(byte[] password) {
 		this.password = password;
 	}
-	public String getSalt() {
+	public byte [] getSalt() {
 		return salt;
 	}
-	public void setSalt(String salt) {
+	public void setSalt(byte[] salt) {
 		this.salt = salt;
 	}
 	public String getJwt() {
@@ -44,6 +45,12 @@ public class User  {
 	}
 	public void setExpirationDate(long expirationDate) {
 		this.expirationDate = expirationDate;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 
   
