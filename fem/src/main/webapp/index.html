@@ -1,22 +1,116 @@
 <!DOCTYPE html 
      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- 
+
+/**
+ * Author: Marco Tranquillin
+ * Last update: 20170814
+ */
+-->
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <title>Hello App Engine</title>
+    
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+    <!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	
+	<!-- Custom CSS -->
+	<style type="text/css">
+
+      /* Sticky footer styles
+      -------------------------------------------------- */
+
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
+
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        height: 60px;
+      }
+      #footer {
+        background-color: #f5f5f5;
+        text-align:center;
+      }
+
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+    </style>
+    
+    <!-- JavaScript -->
+	<script>
+	
+	var URL_PREFIX="http://localhost:8081"; //--> NEEDED FOR Develpoment
+	/**
+		Check if the user is allowed to get access to this page
+	**/
+	function getUserStatus(){
+		$.ajax({
+   			type:'GET',
+	   		url:URL_PREFIX+'/rest/userStatus',
+	   		async:true,
+	   		xhrFields: {
+				withCredentials: true
+	   	   	},
+	   		success: function(data){
+	   				if(data.code!=200){
+	   					//route the user to the login page
+	   					window.location.href='/login.html';
+	   				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) { 
+		        window.location.href='/login.html'; 
+		    } 
+		});
+	}
+	
+	//on document loading
+	$( document ).ready(function() {
+		//check if the user is connected 
+		//getUserStatus();
+	});
+	
+	
+	</script>
+	
+    
+    <title>Forgraf Employee Management</title>
   </head>
 
   <body>
-    <h1>Hello App Engine!</h1>
-  
-    <table>
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Available Servlets:</td>        
-      </tr>
-      <tr>
-        <td><a href='/hello'>The servlet</a></td>
-      </tr>
-    </table>
-  </body>
+	<div class="container">
+		<h2>Forgraf Employee Management</h2>
+	</div>
+	
+	<div id="footer">
+      <div class="container">
+        <p class="muted credit"><br/><b>MrTranqui © 2017</b></a>.</p>
+      </div>
+    </div>
+</body>
 </html>

@@ -1,4 +1,4 @@
-package matranq.fem.datastore;
+package mrtranqui.fem.datastore;
 
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.api.datastore.QueryResultIterator;

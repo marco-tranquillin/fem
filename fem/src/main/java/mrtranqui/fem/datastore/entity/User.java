@@ -1,4 +1,4 @@
-package matranq.fem.datastore.entity;
+package mrtranqui.fem.datastore.entity;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;

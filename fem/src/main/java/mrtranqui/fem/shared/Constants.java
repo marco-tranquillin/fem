@@ -1,4 +1,4 @@
-package matranq.fem.shared;
+package mrtranqui.fem.shared;
 
 import com.google.appengine.api.utils.SystemProperty;
 

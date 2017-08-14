@@ -1,4 +1,4 @@
-package matranq.fem.servlet.rest;
+package mrtranqui.fem.servlet.rest;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import matranq.fem.data.RestResponse;
-import matranq.fem.shared.Constants;
+import mrtranqui.fem.data.RestResponse;
+import mrtranqui.fem.shared.Constants;
 
 public class PostPing extends HttpServlet {
 
@@ -22,10 +22,10 @@ public class PostPing extends HttpServlet {
 		RestResponse restResponse=new RestResponse();
 		Gson gson=new Gson();
 		
-		LOG.info(Constants.HTML_CODE_200_OK + " - " + "PING OK");
+		LOG.info(Constants.HTML_CODE_200_OK + " - " + "PONG");
 		resp.setContentType(Constants.MIME_TYPE_APPLICATION_JSON);
 		restResponse.setCode(Constants.HTML_CODE_200_OK);
-		restResponse.setMessage("OK");
+		restResponse.setMessage("PONG");
 		resp.getWriter().println(gson.toJson(restResponse));
 	}
 

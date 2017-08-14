@@ -9,7 +9,7 @@
 	<!-- REGISTRATION SERVLETS -->
 	<servlet>
 		<servlet-name>Register</servlet-name>
-		<servlet-class>matranq.fem.servlet.rest.PostRegister</servlet-class>
+		<servlet-class>mrtranqui.fem.servlet.rest.PostRegister</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Register</servlet-name>
@@ -18,7 +18,7 @@
 	
 	<servlet>
 		<servlet-name>Login</servlet-name>
-		<servlet-class>matranq.fem.servlet.rest.PostLogin</servlet-class>
+		<servlet-class>mrtranqui.fem.servlet.rest.PostLogin</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Login</servlet-name>
@@ -28,7 +28,7 @@
 	<!-- API -->
 	<servlet>
 		<servlet-name>Ping</servlet-name>
-		<servlet-class>matranq.fem.servlet.rest.PostPing</servlet-class>
+		<servlet-class>mrtranqui.fem.servlet.rest.PostPing</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Ping</servlet-name>
@@ -40,7 +40,7 @@
 	<!-- Security Filter -->
 	<filter>
 		<filter-name>Rest APIs Security</filter-name>
-		<filter-class>matranq.fem.servlet.security.RestSecurityFilter</filter-class>
+		<filter-class>mrtranqui.fem.servlet.security.RestSecurityFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>Rest APIs Security</filter-name>
@@ -56,4 +56,8 @@
 		<filter-name>ObjectifyFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 </web-app>

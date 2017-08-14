@@ -1,4 +1,4 @@
-package matranq.fem.shared;
+package mrtranqui.fem.shared;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -28,8 +28,8 @@ import com.google.appengine.api.utils.SystemProperty;
 import com.google.common.base.Throwables;
 import com.google.gson.Gson;
 
-import matranq.fem.datastore.DatastoreService;
-import matranq.fem.datastore.entity.Log;
+import mrtranqui.fem.datastore.DatastoreService;
+import mrtranqui.fem.datastore.entity.Log;
 
 public class Utils {
 

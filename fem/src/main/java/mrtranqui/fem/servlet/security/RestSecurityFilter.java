@@ -1,10 +1,8 @@
-package matranq.fem.servlet.security;
+package mrtranqui.fem.servlet.security;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -17,16 +15,14 @@ import com.google.gson.Gson;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
-import matranq.fem.data.RestResponse;
-import matranq.fem.datastore.DatastoreService;
-import matranq.fem.datastore.entity.User;
-import matranq.fem.shared.Constants;
+import mrtranqui.fem.data.RestResponse;
+import mrtranqui.fem.datastore.DatastoreService;
+import mrtranqui.fem.datastore.entity.User;
+import mrtranqui.fem.shared.Constants;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.codec.binary.Base64;
 
 public class RestSecurityFilter implements Filter {
     private static final Logger LOG = Logger.getLogger(RestSecurityFilter.class.getName());
