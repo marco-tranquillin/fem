@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 
 import mrtranqui.fem.data.RestResponse;
 import mrtranqui.fem.shared.Constants;
+import mrtranqui.fem.shared.Utils;
 
 public class PostPing extends HttpServlet {
 
@@ -18,6 +19,13 @@ public class PostPing extends HttpServlet {
 	private static final Logger LOG = Logger.getLogger(PostPing.class.getName());
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		//manage dev env
+		if(!Utils.isGaeProduction())	{		
+			resp.addHeader("Access-Control-Allow-Origin", Constants.GAE_DEV_ADDRESS);
+		}
+		//include cookies
+		resp.addHeader("Access-Control-Allow-Credentials","true");
+		
 		//response variables
 		RestResponse restResponse=new RestResponse();
 		Gson gson=new Gson();

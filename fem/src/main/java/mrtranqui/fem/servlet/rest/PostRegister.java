@@ -28,6 +28,12 @@ public class PostRegister extends HttpServlet {
 	private static final Logger LOG = Logger.getLogger(PostRegister.class.getName());
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		//manage dev env
+		if(!Utils.isGaeProduction())	{		
+			resp.addHeader("Access-Control-Allow-Origin", Constants.GAE_DEV_ADDRESS);
+		}
+		//include cookies
+		resp.addHeader("Access-Control-Allow-Credentials","true");
 		
 		//response variables
 		RestResponse restResponse=new RestResponse();

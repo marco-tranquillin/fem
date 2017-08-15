@@ -10,107 +10,128 @@
 -->
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    
-    <!-- Bootstrap -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+		crossorigin="anonymous">
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+		crossorigin="anonymous">
+		
 	<!-- Custom CSS -->
-	<style type="text/css">
+	<style>
+			body {
+			  padding-top: 40px;
+			  padding-bottom: 40px;
+			  background-color: #white;
+			}
+			
+			.input-group .form-control {
+   	 			margin: 0px !important;
+			}
+			
+			.redtext-center {
+ 		       color: red;
+ 		       text-align:center;
+			}
+	</style>
 
-      /* Sticky footer styles
-      -------------------------------------------------- */
-
-      html,
-      body {
-        height: 100%;
-        /* The html and body elements cannot have any padding or margin. */
-      }
-
-      /* Wrapper for page content to push down footer */
-      #wrap {
-        min-height: 100%;
-        height: auto !important;
-        height: 100%;
-        /* Negative indent footer by it's height */
-        margin: 0 auto -60px;
-      }
-
-      /* Set the fixed height of the footer here */
-      #push,
-      #footer {
-        height: 60px;
-      }
-      #footer {
-        background-color: #f5f5f5;
-        text-align:center;
-      }
-
-      /* Lastly, apply responsive CSS fixes as necessary */
-      @media (max-width: 767px) {
-        #footer {
-          margin-left: -20px;
-          margin-right: -20px;
-          padding-left: 20px;
-          padding-right: 20px;
-        }
-      }
-    </style>
-    
-    <!-- JavaScript -->
+	<!-- JavaScript -->
 	<script>
 	
-	var URL_PREFIX="http://localhost:8081"; //--> NEEDED FOR Develpoment
+	var URL_PREFIX="";//"http://localhost:8081"; //--> NEEDED FOR Develpoment
+	
 	/**
-		Check if the user is allowed to get access to this page
-	**/
-	function getUserStatus(){
-		$.ajax({
-   			type:'GET',
-	   		url:URL_PREFIX+'/rest/userStatus',
-	   		async:true,
-	   		xhrFields: {
-				withCredentials: true
-	   	   	},
-	   		success: function(data){
-	   				if(data.code!=200){
-	   					//route the user to the login page
-	   					window.location.href='/login.html';
-	   				}
-			},
-			error: function(XMLHttpRequest, textStatus, errorThrown) { 
-		        window.location.href='/login.html'; 
-		    } 
-		});
+		Check input data
+	*/
+	function checkInputData(){
+		if($('#userName').val()=='' || $('#userName').val()==undefined){
+			$('#userName').focus();
+			$('#loginResponse').html("<h3 class='redtext-center'>Nome utente richiesto</h3>");
+			return false;
+		}
+		if($('#userPassword').val()=='' || $('#userPassword').val()==undefined){
+			$('#userPassword').focus();
+			$('#loginResponse').html("<h3 class='redtext-center'>Password richiesta</h3>");
+			return false;
+		}
+		//input data ok
+		$('#loginResponse').html('');
+		return true;
 	}
 	
-	//on document loading
-	$( document ).ready(function() {
-		//check if the user is connected 
-		//getUserStatus();
-	});
+	/**
+		Login
+	**/
+	function login(){
+		//disable login button
+		$('#btnLogin').prop('disabled', true);
+		if(!checkInputData()){
+			//restore login btn
+			$('#btnLogin').prop('disabled', false);
+			return;
+		}
+		xhr = new XMLHttpRequest();
+		 var url = URL_PREFIX+'/login';
+		 xhr.open("POST", url, true);
+		 xhr.withCredentials = true;
+		 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		 xhr.onreadystatechange = function () {
+			if (xhr.readyState == 4){
+				var data=JSON.parse(xhr.responseText);
+				if(xhr.status == 200){
+					//login ok
+					alert('Login correctly: ' + data.message)
+				}
+				else{
+					//login not ok
+					$('#loginResponse').html("<h3 class='redtext-center'>"+data.message+"</h3>");
+				}
+			}
+			//restore login btn
+			$('#btnLogin').prop('disabled', false);
+		}
+		 var data="{"+
+			 	"'userName':'"+jQuery('#userName').val()+"',"+
+			 	"'userPassword':'"+jQuery('#userPassword').val()+"'"+
+			 	"}";
+		xhr.send(data);
+	}
 	
 	
 	</script>
-	
-    
-    <title>Forgraf Employee Management</title>
-  </head>
 
-  <body>
+
+		<title>Forgraf Employees Management</title>
+</head>
+
+<body>
 	<div class="container">
-		<h2>Forgraf Employee Management</h2>
+	  <div class="row">
+	  	<div class="col-lg-12 col-xs-12">
+	  		<img src="favicon.ico" class="center-block"/>
+	  		<div style="margin-bottom: 25px" class="input-group">
+	        	<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+	        	<input type="email" id="userName" class="form-control" placeholder="Nome utente" autofocus>
+	        </div>
+	        <div style="margin-bottom: 25px" class="input-group">
+	        	<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+	        	<input type="password" id="userPassword" class="form-control" placeholder="Password">
+	        </div>
+	        <button class="btn btn-lg btn-primary btn-block" id='btnLogin' onclick="login()">Log in</button>
+	        <div id='loginResponse'></div>
+	  	</div>
+	  </div>
 	</div>
-	
-	<div id="footer">
-      <div class="container">
-        <p class="muted credit"><br/><b>MrTranqui © 2017</b></a>.</p>
-      </div>
-    </div>
 </body>
 </html>

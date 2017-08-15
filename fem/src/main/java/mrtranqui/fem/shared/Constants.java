@@ -6,11 +6,13 @@ public class Constants {
 	
 	/** GAE APPLICATION **/
 	public static final String GAE_APP_ID = SystemProperty.applicationId.get();
+	public static final String GAE_DEV_ADDRESS = "http://localhost:8080";
 	public static final String GAE_APP_SUFFIX = ".appspot.com";
 	public static final String PROTOCOL_HTTP = "http://";
 	public static final String PROTOCOL_HTTPS = "https://";
 	public static final String GAE_APP_URL = PROTOCOL_HTTPS+GAE_APP_ID + GAE_APP_SUFFIX;
 	public static final String GAE_DATA_BACKEND="GCS"; //use Drive
+	
 	
 	/** API URLs **/
 	public static final String API_URL_PING="/api/ping";

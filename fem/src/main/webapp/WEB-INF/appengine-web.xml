@@ -4,6 +4,7 @@
 	<version>${app.version}</version>
 	<threadsafe>true</threadsafe>
 	<sessions-enabled>true</sessions-enabled>
+	<runtime>java8</runtime>
 	<instance-class>F1</instance-class>
 	<automatic-scaling>
 		<min-idle-instances>0</min-idle-instances>
